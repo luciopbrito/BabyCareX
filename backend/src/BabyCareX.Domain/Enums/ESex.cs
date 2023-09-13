@@ -1,6 +1,6 @@
 namespace BabyCareX.Domain.Enums
 {
-    public enum Sex
+    public enum ESex
     {
         Masculine = 1,
         Feminine,

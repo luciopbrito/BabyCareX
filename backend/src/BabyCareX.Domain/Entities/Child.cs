@@ -6,7 +6,7 @@ namespace BabyCareX.Domain.Entities
     {
         public string Name { get; set; }
         public int Age { get; set; }
-        public Sex Sex { get; set; }
+        public ESex Sex { get; set; }
         public bool IsSpecialChild { get; set; }
         public int FamilyId { get; set; }
         public Family Family { get; set; }
