@@ -26,5 +26,16 @@ namespace BabyCareX.Repository
             return await query.FirstOrDefaultAsync();
         }
 
+        public async Task<Family> GetFamilyById(int id)
+        {
+            IQueryable<Family> query = _context.Families
+                .Include(f => f.Children)
+                .Include(f => f.Schedules);
+
+            query.Where(f => f.Id == id).OrderBy(f => f.Id);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
     }
 }

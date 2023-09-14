@@ -13,6 +13,7 @@ namespace BabyCareX.Repository
         {
             _context = context;
         }
+
         public async Task<Baba> GetBabaByEmailAndPasswordAsync(string email, string password)
         {
             IQueryable<Baba> query = _context.Babas
@@ -25,5 +26,19 @@ namespace BabyCareX.Repository
 
             return await query.FirstOrDefaultAsync();
         }
+
+        public async Task<Baba> GetBabaById(int id)
+        {
+            IQueryable<Baba> query = _context.Babas
+                .Include(b => b.BabaCapacities)
+                .Include(b => b.BabaCourses)
+                .Include(b => b.BabaProvideServices)
+                .Include(b => b.Schedules).ThenInclude(s => s.Family);
+
+            query.Where(f => f.Id == id).OrderBy(f => f.Id);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
     }
 }
