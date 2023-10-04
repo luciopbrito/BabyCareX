@@ -15,15 +15,52 @@ namespace BabyCareX.Application
             _babaRepository = babaRepository;
         }
 
-        public async Task<Baba> AddBaba(Baba baba)
+        public async Task<Baba> AddBabaAsync(Baba baba)
         {
             try
             {
+                var alreadyExist = await _babaRepository.CheckIfAlreadyRegistered(baba.Email);
+
+                if (alreadyExist != null)
+                    throw new Exception("Email already persists on the database.");
+
+                if (baba.BabaCourses != null)
+                {
+                    foreach (var item in baba.BabaCourses)
+                    {
+                        item.CreatedAt = DateTime.Now;
+                    }
+                }
+
+                if (baba.BabaCapacities != null)
+                {
+                    foreach (var item in baba.BabaCapacities)
+                    {
+                        item.CreatedAt = DateTime.Now;
+                    }
+                }
+
+                if (baba.BabaProvideServices != null)
+                {
+                    foreach (var item in baba.BabaProvideServices)
+                    {
+                        item.CreatedAt = DateTime.Now;
+                    }
+                }
+
+                if (baba.Schedules != null)
+                {
+                    foreach (var item in baba.Schedules)
+                    {
+                        item.CreatedAt = DateTime.Now;
+                    }
+                }
+
                 _baseRepository.Add(baba);
 
                 if (await _baseRepository.SaveChangesAsync())
                 {
-                    return await _babaRepository.GetBabaById(baba.Id);
+                    return await _babaRepository.GetBabaByIdAsync(baba.Id);
                 }
 
                 return null;
@@ -34,11 +71,21 @@ namespace BabyCareX.Application
             }
         }
 
-        public async Task<bool> DeleteBaba(int id)
+        public async Task<bool> DeleteAllBabasAsync()
+        {
+            var babas = await _babaRepository.GetAllBabasAsync();
+            if (!babas.Any()) throw new Exception("There aren't any Babas on the database.");
+
+            _baseRepository.DeleteRange(babas.ToArray());
+
+            return await _baseRepository.SaveChangesAsync();
+        }
+
+        public async Task<bool> DeleteBabaByIdAsync(int id)
         {
             try
             {
-                var baba = await _babaRepository.GetBabaById(id)
+                var baba = await _babaRepository.GetBabaByIdAsync(id)
                 ??
                 throw new Exception("Baba to delete does not found");
 
@@ -52,21 +99,35 @@ namespace BabyCareX.Application
             }
         }
 
+        public async Task<IEnumerable<Baba>> GetAllBabasAsync()
+        {
+            var babas = await _babaRepository.GetAllBabasAsync();
+            if (babas == null) return null;
+
+            return babas;
+        }
+
         public async Task<Baba> GetBabaByEmailAndPasswordAsync(string email, string password)
         {
-            return await _babaRepository.GetBabaByEmailAndPasswordAsync(email, password);
+            var baba = await _babaRepository.GetBabaByEmailAndPasswordAsync(email, password);
+            if (baba == null) return null;
+
+            return baba;
         }
 
-        public async Task<Baba> GetBabaById(int id)
+        public async Task<Baba> GetBabaByIdAsync(int id)
         {
-            return await _babaRepository.GetBabaById(id);
+            var baba = await _babaRepository.GetBabaByIdAsync(id);
+            if (baba == null) return null;
+
+            return baba;
         }
 
-        public async Task<Baba> UpdateBaba(Baba baba, int id)
+        public async Task<Baba> UpdateBabaAsync(Baba baba, int id)
         {
             try
             {
-                var babaFromDB = _babaRepository.GetBabaById(id)
+                var babaFromDB = await _babaRepository.GetBabaByIdAsync(id)
                ??
                throw new Exception("Baba to update does not found");
 
@@ -76,7 +137,7 @@ namespace BabyCareX.Application
 
                 if (await _baseRepository.SaveChangesAsync())
                 {
-                    return await _babaRepository.GetBabaById(baba.Id);
+                    return await _babaRepository.GetBabaByIdAsync(baba.Id);
                 }
 
                 return null;

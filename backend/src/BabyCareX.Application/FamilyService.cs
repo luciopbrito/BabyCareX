@@ -15,16 +15,35 @@ namespace BabyCareX.Application
             _familyRepository = familyRepository;
         }
 
-        public async Task<Family> AddFamily(Family familyEntity)
+        public async Task<Family> AddFamilyAsync(Family family)
         {
             try
             {
-                _baseRepository.Add(familyEntity);
+                var alreadyExist = await _familyRepository.CheckIfAlreadyRegistered(family.Email);
+
+                if (alreadyExist != null)
+                    throw new Exception("Email already persists on the database.");
+
+                if (family.Children != null)
+                {
+                    foreach (var f in family.Children)
+                    {
+                        f.CreatedAt = DateTime.Now;
+                    }
+                }
+
+                if (family.Schedules != null)
+                {
+                    foreach (var f in family.Schedules)
+                    {
+                        f.CreatedAt = DateTime.Now;
+                    }
+                }
+
+                _baseRepository.Add(family);
 
                 if (await _baseRepository.SaveChangesAsync())
-                {
-                    return await _familyRepository.GetFamilyById(familyEntity.Id);
-                }
+                    return await _familyRepository.GetFamilyByIdAsync(family.Id);
 
                 return null;
             }
@@ -34,11 +53,21 @@ namespace BabyCareX.Application
             }
         }
 
-        public async Task<bool> DeleteFamily(int id)
+        public async Task<bool> DeleteAllFamiliesAsync()
+        {
+            var families = await _familyRepository.GetAllFamiliesAsync();
+            if (!families.Any()) throw new Exception("There aren't any Families on the database.");
+
+            _baseRepository.DeleteRange(families.ToArray());
+
+            return await _baseRepository.SaveChangesAsync();
+        }
+
+        public async Task<bool> DeleteFamilyByIdAsync(int id)
         {
             try
             {
-                var family = await _familyRepository.GetFamilyById(id) ?? throw new Exception("Family to delete does not found.");
+                var family = await _familyRepository.GetFamilyByIdAsync(id) ?? throw new Exception("Family to delete does not found.");
 
                 _baseRepository.Delete(family);
 
@@ -50,21 +79,35 @@ namespace BabyCareX.Application
             }
         }
 
+        public async Task<IEnumerable<Family>> GetAllFamiliesAsync()
+        {
+            var families = await _familyRepository.GetAllFamiliesAsync();
+            if (families == null) return null;
+
+            return families;
+        }
+
         public async Task<Family> GetFamilyByEmailAndPasswordAsync(string email, string password)
         {
-            return await _familyRepository.GetFamilyByEmailAndPasswordAsync(email, password);
+            var family = await _familyRepository.GetFamilyByEmailAndPasswordAsync(email, password);
+            if (family == null) return null;
+
+            return family;
         }
 
-        public async Task<Family> GetFamilyById(int id)
+        public async Task<Family> GetFamilyByIdAsync(int id)
         {
-            return await _familyRepository.GetFamilyById(id);
+            var family = await _familyRepository.GetFamilyByIdAsync(id);
+            if (family == null) return null;
+
+            return family;
         }
 
-        public async Task<Family> UpdateFamily(Family family, int id)
+        public async Task<Family> UpdateFamilyAsync(Family family, int id)
         {
             try
             {
-                var familyFromDb = _familyRepository.GetFamilyById(id)
+                var familyFromDb = await _familyRepository.GetFamilyByIdAsync(id)
                 ??
                 throw new Exception("Family to update does not found.");
 
@@ -74,7 +117,7 @@ namespace BabyCareX.Application
 
                 if (await _baseRepository.SaveChangesAsync())
                 {
-                    return await _familyRepository.GetFamilyById(family.Id);
+                    return await _familyRepository.GetFamilyByIdAsync(family.Id);
                 }
 
                 return null;

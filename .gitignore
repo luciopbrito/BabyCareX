@@ -521,3 +521,6 @@ $RECYCLE.BIN/
 /**/**/.DS_Store
 /**/**/Thumbs.db
 
+# Hidde Database
+/**/**/**/.db
+/**/**/**/.db-*  

@@ -1,14 +1,15 @@
 using BabyCareX.Domain.Entities;
-using BabyCareX.Repository.Contracts;
 
 namespace BabyCareX.Application.Contracts
 {
     public interface IBabaService
     {
-        Task<Baba> AddBaba(Baba baba);
-        Task<Baba> UpdateBaba(Baba baba, int id);
-        Task<bool> DeleteBaba(int id);
+        Task<Baba> AddBabaAsync(Baba baba);
+        Task<Baba> UpdateBabaAsync(Baba baba, int id);
+        Task<bool> DeleteBabaByIdAsync(int id);
+        Task<bool> DeleteAllBabasAsync();
         Task<Baba> GetBabaByEmailAndPasswordAsync(string email, string password);
-        Task<Baba> GetBabaById(int id);
+        Task<Baba> GetBabaByIdAsync(int id);
+        Task<IEnumerable<Baba>> GetAllBabasAsync();
     }
 }

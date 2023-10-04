@@ -2,7 +2,8 @@ namespace BabyCareX.Domain.Entities
 {
     public class KindNanny : BaseEntity
     {
-        public string Description { get; set; }
-        public IEnumerable<BabaProvideService> BabaProvideServices { get; set; }
+        public required string Description { get; set; }
+        public required string Name { get; set; }
+        public IEnumerable<BabaProvideService>? BabaProvideServices { get; set; }
     }
 }

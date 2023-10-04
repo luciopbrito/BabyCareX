@@ -4,11 +4,11 @@ namespace BabyCareX.Domain.Entities
 {
     public class Child : BaseEntity
     {
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public ESex Sex { get; set; }
-        public bool IsSpecialChild { get; set; }
-        public int FamilyId { get; set; }
-        public Family Family { get; set; }
+        public required string Name { get; set; }
+        public required int Age { get; set; }
+        public required ESex Sex { get; set; }
+        public required bool IsSpecialChild { get; set; }
+        public required int FamilyId { get; set; }
+        public Family? Family { get; set; }
     }
 }

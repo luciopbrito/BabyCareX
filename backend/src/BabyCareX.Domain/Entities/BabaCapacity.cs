@@ -2,8 +2,8 @@ namespace BabyCareX.Domain.Entities
 {
     public class BabaCapacity : BaseEntity
     {
-        public string Name { get; set; }
-        public int BabaId { get; set; }
-        public Baba Baba { get; set; }
+        public required string Name { get; set; }
+        public required int BabaId { get; set; }
+        public Baba? Baba { get; set; }
     }
 }
