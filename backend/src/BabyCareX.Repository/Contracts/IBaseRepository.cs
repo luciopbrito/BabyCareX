@@ -8,6 +8,7 @@ namespace BabyCareX.Repository.Contracts
         void Add<T>(T entity) where T : BaseEntity;
         void Update<T>(T entity) where T : BaseEntity;
         void Delete<T>(T entity) where T : BaseEntity;
+        void DeleteRange<T>(T[] entityArray) where T : BaseEntity;
         Task<bool> ChangeStatus<T>(T entity, EStatus status) where T : BaseEntity;
         Task<bool> SaveChangesAsync();
     }

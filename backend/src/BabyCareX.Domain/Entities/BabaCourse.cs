@@ -1,12 +1,12 @@
 namespace BabyCareX.Domain.Entities
 {
-    public class BabaCourse
+    public class BabaCourse : BaseEntity
     {
-        public string Name { get; set; }
-        public bool IsCompleted { get; set; }
-        public string StartPeriod { get; set; }
-        public string EndPeriod { get; set; }
-        public int BabaId { get; set; }
-        public Baba Baba { get; set; }
+        public required string Name { get; set; }
+        public required DateTime StartPeriod { get; set; }
+        public DateTime? EndPeriod { get; set; }
+        public required bool IsCompleted { get; set; }
+        public required int BabaId { get; set; }
+        public Baba? Baba { get; set; }
     }
 }
