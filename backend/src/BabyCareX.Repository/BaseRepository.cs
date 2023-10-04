@@ -16,6 +16,7 @@ namespace BabyCareX.Repository
 
         public void Add<T>(T entity) where T : BaseEntity
         {
+            entity.StatusId = EStatus.ATIVO;
             entity.CreatedAt = DateTime.Now;
             _context.Add(entity);
         }
@@ -25,19 +26,19 @@ namespace BabyCareX.Repository
             switch (status)
             {
                 case EStatus.ATIVO:
-                    entity.StatusId = 1;
+                    entity.StatusId = EStatus.ATIVO;
                     _context.Update(entity);
                     break;
                 case EStatus.INATIVO:
-                    entity.StatusId = 2;
+                    entity.StatusId = EStatus.INATIVO;
                     _context.Update(entity);
                     break;
                 case EStatus.CANCELADO:
-                    entity.StatusId = 3;
+                    entity.StatusId = EStatus.CANCELADO;
                     _context.Update(entity);
                     break;
                 case EStatus.DELETADO:
-                    entity.StatusId = 4;
+                    entity.StatusId = EStatus.DELETADO;
                     _context.Update(entity);
                     break;
             }
@@ -48,6 +49,11 @@ namespace BabyCareX.Repository
         public void Delete<T>(T entity) where T : BaseEntity
         {
             _context.Remove(entity);
+        }
+
+        public void DeleteRange<T>(T[] entityArray) where T : BaseEntity
+        {
+            _context.RemoveRange(entityArray);
         }
 
         public async Task<bool> SaveChangesAsync()
