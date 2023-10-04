@@ -522,5 +522,4 @@ $RECYCLE.BIN/
 /**/**/Thumbs.db
 
 # Hidde Database
-/**/**/**/.db
-/**/**/**/.db-*  
+/**/**/**/*.db*
