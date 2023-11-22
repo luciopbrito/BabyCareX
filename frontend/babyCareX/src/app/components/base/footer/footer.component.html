@@ -1,0 +1,22 @@
+<footer class="bg-primary py-5 px-10 flex flex-col items-center">
+  <div class="md:grid-cols-1 xl:grid-cols-3 grid gap-10 max-w-screen-2xl">
+    <div class="col-span-1">
+      <img src="../../../../assets/imgs/logo.png" alt="logo" />
+    </div>
+    <div class="col-span-1 justify-self-center">
+      <ul class="flex list-none gap-5">
+          <li *ngFor="let item of menu">
+            <a class="text-white" [routerLink]="item.href">{{item.name}}</a>
+          </li>
+      </ul>
+    </div>
+    <div class="col-span-1 justify-self-center">
+      <div>
+        <img src="../../../../assets/icons/Instagram.png" alt="icons">
+      </div>
+    </div>
+  </div>
+  <div class="text-white text-center mt-8">
+    &copy; BabyCareX {{ yearCurrent() }}. Todos os direitos reservados.
+  </div>
+</footer>
