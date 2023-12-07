@@ -1,0 +1,36 @@
+<div class="flex justify-center w-full px-5">
+  <ng-container *ngIf="isFamily">
+    <form [formGroup]="formFamily" class="w-full max-w-none sm:max-w-screen-sm md:max-w-screen-sm lg:max-w-screen-sm xl:max-w-screen-sm 2xl:max-w-screen-sm gap-5 grid grid-cols-1 my-32" (ngSubmit)="saveFormFamily()">
+      <div class="col-span-1 gap-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
+        <label class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2 2xl:col-span-2 title-form">Informações dos Responsáveis</label>
+        <div class="col-span-1">
+          <input class="p-2 border rounded w-full" type="text" placeholder="nome do pai" formControlName="fatherName">
+        </div>
+        <div class="col-span-1">
+          <input class="p-2 border rounded w-full" type="text" placeholder="nome de mãe" formControlName="motherName">
+        </div>
+      </div>
+      <div class="col-span-1 gap-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
+        <label class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2 2xl:col-span-2 title-form">Informações para acesso</label>
+        <div class="col-span-1">
+          <input class="p-2 border rounded w-full" type="text" placeholder="nome da família*" formControlName="familyName">
+        </div>
+        <div class="col-span-1">
+          <input class="p-2 border rounded w-full" type="text" placeholder="telefone*" formControlName="phoneNumber">
+        </div>
+        <div class="col-span-1">
+          <input class="p-2 border rounded w-full" type="text" placeholder="email para acesso*" formControlName="email">
+        </div>
+        <div class="col-span-1">
+          <input class="p-2 border rounded w-full" type="text" placeholder="senha*" formControlName="password">
+        </div>
+      </div>
+      <div class="col-span-1 flex justify-end">
+        <button mat-raised-button type="submit" color="primary">Enviar</button>
+      </div>
+    </form>
+  </ng-container>
+  <ng-template *ngIf="isBaba">
+    <form [formGroup]="formBaba"></form>
+  </ng-template>
+</div>

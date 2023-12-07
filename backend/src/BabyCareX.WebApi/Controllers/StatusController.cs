@@ -140,7 +140,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete Status.",
                     DeveloperMessage = "An error during process to delete Status."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {
@@ -195,7 +195,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete Status.",
                     DeveloperMessage = "An error during process to delete Status."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {

@@ -1,0 +1,55 @@
+<div class="flex justify-center w-full">
+  <form [formGroup]="form" (ngSubmit)="saveForm()"
+    class="w-full max-w-screen-lg p-5 gap-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
+    <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2 2xl:col-span-2">
+      <h1 *ngIf="edition">Editando</h1>
+      <h1 *ngIf="!edition">Cadastro de Criança</h1>
+    </div>
+    <div class="col-span-1">
+      <input class="w-full p-2 border rounded" type="text" placeholder="nome da criança" formControlName="name">
+    </div>
+    <div class="col-span-1">
+      <input class="w-full p-2 border rounded" type="text" placeholder="idade" formControlName="age">
+    </div>
+    <div class="col-span-1 w-full gap-2 flex flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row 2xl:flex-row justify-between">
+      <!-- <div class="flex items-center gap-2">
+        <input type="checkbox" formControlName="personalData">
+        <label>Dados Pessoais</label>
+        <mat-icon class="text-second" matTooltipPosition="above" matTooltip="Informações
+          relacionada a esta criança serão ocultas para as babas, sendo informada apenas pelos responsáveis.">
+          info_outline
+        </mat-icon>
+      </div> -->
+      <div class="flex items-center gap-2">
+        <input type="checkbox" formControlName="isSpecialChild">
+        <label>Criança Especial</label>
+        <mat-icon class="text-second" matTooltipPosition="above" matTooltip="Crianças com algum tipo de deficiência, que necessitam de atenção e cuidado maior que outras.">
+          info_outline
+        </mat-icon>
+      </div>
+    </div>
+    <div class="col-span-1">
+      <mat-form-field class="w-full">
+        <mat-label>Gênero</mat-label>
+        <mat-select formControlName="sex">
+            <mat-option *ngFor="let option of genderSelectOptions" [value]="option.value">{{option.option}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2 2xl:col-span-2 flex justify-end gap-5">
+      <ng-container *ngIf="edition; else noEdition">
+        <button mat-raised-button type="button" (click)="cancelModal()">
+          Cancelar
+        </button>
+        <button mat-raised-button type="submit" color="primary">
+          Salvar
+        </button>
+      </ng-container>
+      <ng-template #noEdition>
+        <button mat-raised-button type="submit" color="primary">
+          Cadastrar
+        </button>
+      </ng-template>
+    </div>
+  </form>
+</div>

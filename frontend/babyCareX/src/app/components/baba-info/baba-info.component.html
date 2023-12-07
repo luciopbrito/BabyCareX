@@ -1,0 +1,25 @@
+<ng-container *ngIf="forFamily">
+  <ng-container *ngIf="baba$ | async as baba; else loading">
+    <div class="flex items-center gap-5">
+      <h1 style="margin: 0;">Dados da Baba {{baba.name}}</h1>
+      <ng-container *ngIf="schedule$ | async as schedule">
+        <span>vezes na semana {{schedule.timesAWeek}}</span>
+      </ng-container>
+    </div>
+    <div class="bg-primary rounded p-6 pb-0 text-white w-full flex flex-col gap-2">
+      <h3>
+        <span class="font-bold">Email:</span>
+        {{baba.email}}
+      </h3>
+      <h3>
+        <span class="font-bold">Telefone:</span>
+        {{baba.phoneNumber}}
+      </h3>
+    </div>
+  </ng-container>
+  <ng-template #loading>
+    <div class="flex justify-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+</ng-container>

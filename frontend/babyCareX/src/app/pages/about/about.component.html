@@ -1,0 +1,23 @@
+<div class="flex justify-center p-5">
+  <div class="max-w-screen-xl">
+    <h1 class="text-center">Sobre nos</h1>
+    <p class="text-justify">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio mollitia aliquam sequi quo eveniet praesentium dolor, deserunt libero quaerat modi sit, accusamus quia deleniti dolore repellat nulla alias, beatae esse.
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, nostrum quis? Dignissimos tempora cumque culpa repellendus assumenda aspernatur similique earum voluptas molestiae error quas amet nesciunt, debitis ipsum! Possimus, natus?
+    </p>
+    <ng-container *ngIf="showChooseUser">
+      <h2 class="text-center">Inicie sua experiência agora como:</h2>
+      <div class="flex justify-center">
+        <div class="flex gap-5 items-center">
+          <button mat-raised-button type="button" color="primary" routerLink="/family">
+            Familia
+          </button>
+          <span>ou</span>
+          <button mat-raised-button type="button" color="primary" routerLink="/baba">
+            Baba
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

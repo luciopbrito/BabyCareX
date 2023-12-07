@@ -5,6 +5,7 @@ using BabyCareX.Application.Models.Error;
 using BabyCareX.Application.Models.Family;
 using BabyCareX.Domain.Entities;
 using BabyCareX.Domain.Enums;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BabyCareX.WebApi.Controllers
@@ -90,6 +91,7 @@ namespace BabyCareX.WebApi.Controllers
                     {
                         Status = StatusCodes.Status404NotFound,
                         DeveloperMessage = "Email or Password does not persist on the database",
+                        ErrorCode = "404",
                         UserMessage = "An error during the request to login."
                     });
 
@@ -236,7 +238,7 @@ namespace BabyCareX.WebApi.Controllers
                     DeveloperMessage = "An error during process to delete family.",
                     UserMessage = "An error during the request to delete family."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {
@@ -263,7 +265,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete all Families.",
                     DeveloperMessage = "An error during process to delete all Families."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {
@@ -483,7 +485,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete Child.",
                     DeveloperMessage = "An error during process to delete Child."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {
@@ -510,7 +512,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete all Children.",
                     DeveloperMessage = "An error during process to delete all Children."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {
