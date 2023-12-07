@@ -1,0 +1,15 @@
+<ng-container *ngFor="let option of options; let i = index">
+  <div class="h-screen w-screen flex flex-col justify-center option option_{{i}}" [class.hidden]="i !== questionPosition.value">
+    <h1 class="text-fifth text-center uppercase font-normal">{{ option.question }}</h1>
+    <div class="flex justify-center gap-5 my-5">
+      <button mat-raised-button type="button" color="primary" (click)="option.btnYes()" (click)="nextQuestion()">Sim</button>
+      <button mat-raised-button type="button" color="primary" (click)="option.btnNot()" (click)="nextQuestion()">Não</button>
+    </div>
+    <div *ngIf="i > 0" class="flex justify-center w-full">
+      <div class="max-w-screen-md w-full flex justify-end gap-5">
+        <button mat-raised-button type="button" color="primary" (click)="previousQuestion()">anterior</button>
+        <button *ngIf="i + 1 !== options.length" mat-raised-button type="button" color="primary" class="max-w-sm" (click)="nextQuestion()">próximo</button>
+      </div>
+    </div>
+  </div>
+</ng-container>

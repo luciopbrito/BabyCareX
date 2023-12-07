@@ -3,8 +3,14 @@
     <div>
       <img class="w-full" src="../../../../assets/imgs/logo.png" alt="logo" />
     </div>
-    <div>
-      <span class="text-white">login</span>
+    <div class="flex items-center gap-5 text-white">
+      <ng-container *ngIf="isLogon; else isnLogon;">
+        <span>Olá {{ name }}</span>
+        <span class="hover:cursor-pointer" (click)="logout()">sair</span>
+      </ng-container>
+      <ng-template #isnLogon>
+        <span class="hover:cursor-pointer" routerLink="/family/login">login</span>
+      </ng-template>
     </div>
   </div>
 </header>

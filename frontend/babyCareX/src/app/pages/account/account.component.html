@@ -1,0 +1,39 @@
+<div class="flex justify-center p-5">
+  <ng-container *ngIf="isFamily">
+    <ng-container *ngIf="account$ | async as account; else loading">
+      <div
+        class="w-full max-w-screen-sm grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-5">
+        <div class="col-span-1">
+          Nome da Família: {{account.familyName}}
+        </div>
+        <div class="col-span-1">
+          Nome do pai: {{account.fatherName == null ? 'Não definido' : account.fatherName}}
+        </div>
+        <div class="col-span-1">
+          Nome da mãe: {{account.motherName == null ? 'Não definido' : account.motherName}}
+        </div>
+        <div class="col-span-1">
+          Email de acesso: {{account.email}}
+        </div>
+        <div class="col-span-1">
+          Número para contato: {{account.phoneNumber}}
+        </div>
+        <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2 2xl:col-span-2">
+          <button mat-raised-button type="button" color="primary" (click)="openModalEdition(account)">Editar
+            informações</button>
+        </div>
+        <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2 2xl:col-span-2">
+          <h1>Acessos</h1>
+          <button mat-raised-button type="button" color="primary" (click)="authenticationToChangePassword(account)">Trocar
+            de senha</button>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="isBaba">
+
+  </ng-container>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</div>

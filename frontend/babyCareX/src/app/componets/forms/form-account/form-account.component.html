@@ -1,0 +1,28 @@
+<div class="flex justify-center p-5">
+  <ng-container *ngIf="isFamily">
+    <form [formGroup]="formFamily" (ngSubmit)="saveForm()" class="max-w-screen-lg w-full gap-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
+      <div *ngIf="edition" class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2 2xl:col-span-2">
+        <h1>Editando</h1>
+      </div>
+      <div class="col-span-1">
+        <input class="w-full p-2 border rounded" placeholder="Nome da Família" type="text" formControlName="familyName">
+      </div>
+      <div class="col-span-1">
+        <input class="w-full p-2 border rounded" placeholder="Nome do pai" type="text" formControlName="fatherName">
+      </div>
+      <div class="col-span-1">
+        <input class="w-full p-2 border rounded" placeholder="Nome da mãe" type="text" formControlName="motherName">
+      </div>
+      <div class="col-span-1">
+        <input class="w-full p-2 border rounded" placeholder="Número para contato" type="text" formControlName="phoneNumber">
+      </div>
+      <div class="col-span-1">
+        <input class="w-full p-2 border rounded" placeholder="email" type="email" formControlName="email">
+      </div>
+      <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2 2xl:col-span-2 flex justify-end gap-5">
+        <button *ngIf="isModal" mat-raised-button type="button" color="" (click)="closeModal()">Cancelar</button>
+        <button mat-raised-button type="submit" color="primary">Salvar</button>
+      </div>
+    </form>
+  </ng-container>
+</div>
