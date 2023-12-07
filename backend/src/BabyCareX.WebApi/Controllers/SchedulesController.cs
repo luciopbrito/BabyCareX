@@ -143,7 +143,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete Schedule.",
                     DeveloperMessage = "An error during process to delete Schedule."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
 
             }
             catch (Exception ex)
@@ -255,7 +255,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete all Schedule.",
                     DeveloperMessage = "An error during process to delete all Schedule."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {

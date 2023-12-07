@@ -90,6 +90,7 @@ namespace BabyCareX.WebApi.Controllers
                     {
                         Status = StatusCodes.Status404NotFound,
                         DeveloperMessage = "Email or Password does not persist on the database",
+                        ErrorCode = "404",
                         UserMessage = "An error during the request to login."
                     });
                 }
@@ -234,7 +235,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete all Babas.",
                     DeveloperMessage = "An error during process to delete all Babas."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {
@@ -261,7 +262,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete Baba.",
                     DeveloperMessage = "An error during process to delete Baba."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {
@@ -479,7 +480,7 @@ namespace BabyCareX.WebApi.Controllers
                     });
 
                 return await babaCapacitiesService.DeleteBabaCapacityByIdAsync(babaCapacitiesId) ?
-                    Ok("Deleted") :
+                    Ok(new { message = "Deleted" }) :
                     BadRequest(new ErrorHandling()
                     {
                         Status = StatusCodes.Status400BadRequest,
@@ -512,7 +513,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete BabaCapacity.",
                     DeveloperMessage = "An error during process to delete BabaCapacity."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {
@@ -739,7 +740,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete Baba Course.",
                     DeveloperMessage = "An error during process to delete Baba Course."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {
@@ -766,7 +767,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete all BabaCourses.",
                     DeveloperMessage = "An error during process to delete all BabaCourses."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {
@@ -984,7 +985,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete BabaProvideServices.",
                     DeveloperMessage = "An error during process to delete BabaProvideServices."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {
@@ -1011,7 +1012,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete all BabaProvideServices.",
                     DeveloperMessage = "An error during process to delete all BabaProvideServices."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {

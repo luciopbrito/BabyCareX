@@ -165,7 +165,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete KindNanny.",
                     DeveloperMessage = "An error during process to delete KindNanny."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {
@@ -191,7 +191,7 @@ namespace BabyCareX.WebApi.Controllers
                     UserMessage = "An error during the request to delete all KindNannies.",
                     DeveloperMessage = "An error during process to delete all KindNannies."
                 }) :
-                Ok("Deleted");
+                Ok(new { message = "Deleted" });
             }
             catch (Exception ex)
             {
