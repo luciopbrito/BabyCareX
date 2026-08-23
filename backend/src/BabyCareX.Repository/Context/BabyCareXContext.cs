@@ -63,6 +63,20 @@ namespace BabyCareX.Repository.Context
                 .WithOne(b => b.KindNanny)
                 .HasForeignKey(b => b.KindNannyId)
                 .HasPrincipalKey(k => k.Id);
+
+
+            modelBuilder.Entity<Status>().HasData(
+                new Status { Id = 1, Description = "ATIVO", CreatedAt = DateTime.Now },
+                new Status { Id = 2, Description = "INATIVO", CreatedAt = DateTime.Now },
+                new Status { Id = 3, Description = "CANCELADO", CreatedAt = DateTime.Now },
+                new Status { Id = 4, Description = "DELETADO", CreatedAt = DateTime.Now }
+            );
+           
+            modelBuilder.Entity<KindNanny>().HasData(
+                new KindNanny { Id= 1, Name = "Baba", Description = "Baba para qualquer momento", CreatedAt = DateTime.Now, StatusId = Domain.Enums.EStatus.ATIVO },
+                new KindNanny { Id= 2, Name = "Babysitter", Description = "Baba para dias específicos", CreatedAt = DateTime.Now, StatusId = Domain.Enums.EStatus.ATIVO },
+                new KindNanny { Id= 3, Name = "Au Pair", Description = "Baba para fora do pais", CreatedAt = DateTime.Now, StatusId = Domain.Enums.EStatus.ATIVO }
+            );
         }
     }
 }
